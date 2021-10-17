@@ -1,6 +1,27 @@
 
 # curl http://localhost:8080/books
-GET http://localhost:8080/books/addBook
+GET http://localhost:8080/books
+
+
+###
+
+# curl -X POST -i -H "Content-Type: application/json"
+#-d '{"isbn":"34321","title":"Thinking in Java", "publisher":"Helion","type":"programming", "author":"Bruce Eckel"}'
+#http://localhost:8080/books
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "isbn": "34321",
+  "title": "Thinking in Java",
+  "publisher": "Helion",
+  "type": "programming",
+  "author": "Bruce Eckel"
+}
+
+###
+
+
 
 ###
 

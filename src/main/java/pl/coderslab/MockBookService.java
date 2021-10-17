@@ -10,6 +10,7 @@ import java.util.List;
 public class MockBookService implements BookService{
 
     private List<Book> list;
+
     public MockBookService() {
         list = new ArrayList<>();
         list.add(new Book(1L, "9788324631766", "Thiniking	in	Java", "Bruce	Eckel", "Helion", "programming"));
@@ -19,7 +20,7 @@ public class MockBookService implements BookService{
                 "programming"));
     }
 
-
+    @Override
     public Book getBook (Long id){
         for(Book b : list){
             if(b.getId().equals(id)){
@@ -29,16 +30,31 @@ public class MockBookService implements BookService{
         return null;
     }
 
+    @Override
+    public void deleteBook(Long id) {
+        for(Book b : list){
+            if (b.getId().equals(id)){
+                list.remove(b);
+            }
+        }
+    }
 
-    public void addBook (Book book){
-        //Book book = new Book(id, isbn, title, author, publisher, type);
+    @Override
+    public void update(Book book) {
+
+        list.indexOf(book);
+    }
+
+    @Override
+    public Book addBook (Book book){
+        book.setId(getLastId());
         list.add(book);
-
+        return book;
     }
 
-    public List<Book> getList() {
+ /*   public List<Book> getList() {
         return list;
-    }
+    }*/
 
     public void setList(List<Book> list) {
         this.list = list;
@@ -47,5 +63,14 @@ public class MockBookService implements BookService{
     @Override
     public List<Book> getBooks() {
         return this.list;
+    }
+
+
+    public Long getLastId(){
+
+        int listSize = list.size();
+        Long lastID = list.get(listSize-1).getId();
+
+        return lastID+1;
     }
 }
